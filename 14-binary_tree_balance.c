@@ -32,7 +32,7 @@ int binary_tree_balance(const binary_tree_t *tree)
 int get_subtree_height(const binary_tree_t *tree, char direction)
 {
 	int height = 0;
-	
+
 	if (direction == 'l')
 	{
 		while (tree->left != NULL)
