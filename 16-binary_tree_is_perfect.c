@@ -16,7 +16,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 
 	if (tree == NULL)
 		return (0);
-	
+
 	/* find the height of the tree */
 	height = binary_tree_height(tree);
 
@@ -48,6 +48,6 @@ int is_perfect_recursive(const binary_tree_t *tree, int height)
 		return (0);
 	}
 
-	return (is_perfect_recursive(tree->left, height) && 
+	return (is_perfect_recursive(tree->left, height) &&
 			is_perfect_recursive(tree->right, height));
 }
