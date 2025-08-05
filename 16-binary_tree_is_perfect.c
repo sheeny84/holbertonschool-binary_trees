@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include "binary_trees.h"
 #include "4-binary_tree_is_leaf.c"
+#include "9-binary_tree_height.c"
+#include "10-binary_tree_depth.c"
 
 /**
  * binary_tree_is_perfect - check if a binary tree is perfect
@@ -10,21 +12,42 @@
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
+	int height;
+
 	if (tree == NULL)
 		return (0);
-	/* if both children are null i.e. leaf node*/
-	if (tree->left == NULL && tree->right == NULL)
-		return (1);
+	
+	/* find the height of the tree */
+	height = binary_tree_height(tree);
 
-	/* if both children exist */
-	if (tree->left != NULL && tree->right != NULL)
+	return (is_perfect_recursive(tree, height));
+}
+
+/**
+ * is_perfect_recursive - recursive function to chekc if binary tree is
+ * perfect
+ * @tree: tree to check
+ * @height: height of the tree
+ *
+ * Return: 1 if perfect, 0 otherwise
+ */
+int is_perfect_recursive(const binary_tree_t *tree, int height)
+{
+	int depth;
+
+	/* if node is leaf */
+	if (binary_tree_is_leaf(tree))
 	{
-		if (tree->n < (tree->left)->n ||
-				tree->n > (tree->right)->n)
-			return (0);
-		return (binary_tree_is_perfect(tree->left) &&
-			binary_tree_is_perfect(tree->right));
+		depth = binary_tree_depth(tree);
+		return (height == depth);
 	}
 
-	return (0);
+	/* if only one child exists */
+	if (tree->left == NULL || tree->right == NULL)
+	{
+		return (0);
+	}
+
+	return (is_perfect_recursive(tree->left, height) && 
+			is_perfect_recursive(tree->right, height));
 }
