@@ -10,15 +10,18 @@
  */
 int binary_tree_is_full(const binary_tree_t *tree)
 {
-	if (tree == NULL || tree->left == NULL || tree->right == NULL)
+	if (tree == NULL)
 		return (0);
-
-	if (binary_tree_is_leaf(tree->left) &&
-			binary_tree_is_leaf(tree->right))
+	/* if both children are null i.e. leaf node*/
+	if (tree->left == NULL && tree->right == NULL)
 		return (1);
 
-	binary_tree_is_full(tree->left);
-	binary_tree_is_full(tree->right);
+	/* if both children exist */
+	if (tree->left != NULL && tree->right != NULL)
+	{
+		return (binary_tree_is_full(tree->left) &&
+			binary_tree_is_full(tree->right));
+	}
 
 	return (0);
 }

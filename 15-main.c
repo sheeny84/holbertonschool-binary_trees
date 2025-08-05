@@ -18,13 +18,16 @@ int main(void)
     binary_tree_insert_right(root->left, 54);
     binary_tree_insert_right(root, 128);
     root->left->left = binary_tree_node(root->left, 10);
-    binary_tree_print(root);
+    root->right->left = binary_tree_node(root->right, 22);
+    binary_tree_print(root); 
 
     full = binary_tree_is_full(root);
     printf("Is %d full: %d\n", root->n, full);
+    /*
     full = binary_tree_is_full(root->left);
     printf("Is %d full: %d\n", root->left->n, full);
     full = binary_tree_is_full(root->right);
     printf("Is %d full: %d\n", root->right->n, full);
+    */
     return (0);
 }
