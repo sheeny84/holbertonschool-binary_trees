@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "binary_trees.h"
+#include "9-binary_tree_height.c"
 
 /**
  * binary_tree_balance - measure the balance factor of a binary tree
@@ -16,38 +17,13 @@ int binary_tree_balance(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (0);
 
-	height_left = get_subtree_height(tree, 'l');
-	height_right = get_subtree_height(tree, 'r');
-
-	return (height_left - height_right);
-}
-
-/**
- * get_subtree_height - measure the height of a subtee
- * @tree: pointer to root node of the tree
- * @direction: 'l' for left or 'r' for right
- *
- * Return: height of the subtree
- */
-int get_subtree_height(const binary_tree_t *tree, char direction)
-{
-	int height = 0;
-
-	if (direction == 'l')
-	{
-		while (tree->left != NULL)
-		{
-			tree = tree->left;
-			height++;
-		}
-	}
+	if (tree->left == NULL)
+		height_left = 0;
 	else
-	{
-		while (tree->right != NULL)
-		{
-			tree = tree->right;
-			height++;
-		}
-	}
-	return (height);
+		height_left = 1 + binary_tree_height(tree->left);
+	if (tree->right == NULL)
+		height_right = 0;
+	else
+		height_right =  1 + binary_tree_height(tree->right);
+	return (height_left - height_right);
 }
